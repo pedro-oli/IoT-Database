@@ -1,0 +1,4 @@
+use dbTime1
+db.createCollection("logs")
+db.logs.insertOne({timestamp: 0, action: "teste_inicial", payload: {}})
+db.logs.find()
