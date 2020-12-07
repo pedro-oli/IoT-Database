@@ -2,3 +2,22 @@ use dbTime1
 db.createCollection("logs")
 db.logs.insertOne({timestamp: 0, action: "teste_inicial", payload: {}})
 db.logs.find()
+
+use admin
+db.createUser(
+  {
+    user: "adminTime1",
+    pwd: passwordPrompt(),  // or cleartext password
+    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
+  }
+)
+
+## Then logged in as "adminTime1" (Então, logado como "adminTime1") ##
+use dbTime1
+db.createUser(
+  {
+    user: "time1",
+    pwd: passwordPrompt(),  // or cleartext password
+    roles: [ { role: "readWrite", db: "dbTime1" } ]
+  }
+)
